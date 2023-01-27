@@ -15,18 +15,18 @@ CREATE TABLE games (
     category_id UUID NOT NULL
 );
 
-CREATE TABLE tags (
+CREATE TABLE games_comments (
     id UUID PRIMARY KEY,
-    name VARCHAR(30),
-    description VARCHAR,
-    is_active BOOLEAN DEFAULT TRUE
+    message VARCHAR,
+    game_id UUID NOT NULL,
+    user_id UUID NOT NULL
 );
 
-
-CREATE TABLE games_tags (
+CREATE TABLE games_marks (
     id UUID PRIMARY KEY,
+    score NUMERIC(5, 2),
     game_id UUID NOT NULL,
-    tag_id UUID NOT NULL
+    user_id UUID NOT NULL
 );
 
 CREATE TABLE identities (
@@ -48,8 +48,10 @@ CREATE TABLE users (
 
 ALTER TABLE games ADD FOREIGN KEY(category_id) REFERENCES categories(id);
 ALTER TABLE users ADD FOREIGN KEY(identity_id) REFERENCES identities(id);
-ALTER TABLE games_tags ADD FOREIGN KEY(game_id) REFERENCES games(id);
-ALTER TABLE games_tags ADD FOREIGN KEY(tag_id) REFERENCES tags(id); 
+ALTER TABLE games_comments ADD FOREIGN KEY(game_id) REFERENCES games(id);
+ALTER TABLE games_comments ADD FOREIGN KEY(user_id) REFERENCES users(id);
+ALTER TABLE games_marks ADD FOREIGN KEY(game_id) REFERENCES games(id);
+ALTER TABLE games_marks ADD FOREIGN KEY(user_id) REFERENCES users(id);
 
 CREATE EXTENSION unaccent;
 
