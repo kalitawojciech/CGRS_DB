@@ -36,12 +36,11 @@ CREATE TABLE tags (
 );
 
 CREATE TABLE games_tags (
-    id UUID PRIMARY KEY,
     game_id UUID NOT NULL,
     tag_id UUID NOT NULL
 );
 
-CREATE TABLE identities (
+CREATE TABLE users_identities (
     id UUID PRIMARY KEY,
     password_hash BYTEA NOT NULL,
     password_salt BYTEA NOT NULL
