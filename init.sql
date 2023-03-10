@@ -32,7 +32,7 @@ CREATE TABLE games_marks (
 CREATE TABLE tags (
     id UUID PRIMARY KEY,
     name VARCHAR(30),
-    is_active BOOLEAN DEFAULT TRUE,
+    is_active BOOLEAN DEFAULT TRUE
 );
 
 CREATE TABLE games_tags (
@@ -59,7 +59,7 @@ CREATE TABLE users (
 
 
 ALTER TABLE games ADD FOREIGN KEY(category_id) REFERENCES categories(id);
-ALTER TABLE users ADD FOREIGN KEY(identity_id) REFERENCES identities(id);
+ALTER TABLE users ADD FOREIGN KEY(identity_id) REFERENCES users_identities (id);
 ALTER TABLE games_comments ADD FOREIGN KEY(game_id) REFERENCES games(id);
 ALTER TABLE games_comments ADD FOREIGN KEY(user_id) REFERENCES users(id);
 ALTER TABLE games_marks ADD FOREIGN KEY(game_id) REFERENCES games(id);
