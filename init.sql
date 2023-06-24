@@ -36,8 +36,9 @@ CREATE TABLE tags (
 );
 
 CREATE TABLE games_tags (
-    game_id UUID NOT NULL,
-    tag_id UUID NOT NULL
+    game_id UUID NOT NULL REFERENCES games(id),
+    tag_id UUID NOT NULL REFERENCES tags(id),
+	PRIMARY KEY (game_id, tag_id)
 );
 
 CREATE TABLE users_identities (
@@ -64,8 +65,6 @@ ALTER TABLE games_comments ADD FOREIGN KEY(game_id) REFERENCES games(id);
 ALTER TABLE games_comments ADD FOREIGN KEY(user_id) REFERENCES users(id);
 ALTER TABLE games_marks ADD FOREIGN KEY(game_id) REFERENCES games(id);
 ALTER TABLE games_marks ADD FOREIGN KEY(user_id) REFERENCES users(id);
-ALTER TABLE games_tags ADD FOREIGN KEY(game_id) REFERENCES games(id);
-ALTER TABLE games_tags ADD FOREIGN KEY(tag_id) REFERENCES tags(id);
 
 CREATE EXTENSION unaccent;
 
